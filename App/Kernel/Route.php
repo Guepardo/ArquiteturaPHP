@@ -33,7 +33,9 @@ class Route {
 		// REMOVE: degub
 		// array_push(self::$routes[$method], ['route' => $route, 'foo' => $foo]); 
 		// var_dump(self::$routes); 
-		return array_push(self::$routes[$method], ['route' => $route, 'foo' => $foo]); 
+		return self::$routes[$method][$route] = $foo; 
+
+		// return array_push(self::$routes[$method], ['route' => $route, 'foo' => $foo]); 
 	}
 
 }

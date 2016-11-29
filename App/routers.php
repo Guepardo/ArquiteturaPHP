@@ -7,16 +7,25 @@ use App\Kernel\Route;
 	Exemplo de uso: 
 
 	Route::get('/welcome', function($params){
-		echo "Olá mundo"
+		return "Olá mundo"
 	}); 
+	
+	Saída esperada no navegador 'Olá mundo'; 
+
 
 	Ou
 
 	Route::post('/new_user', function($params){
-		echo json_encode(['status' => 'registrado com sucesso']); 
+		return ['status' => 'registrado com sucesso']; 
 	}); 
+
+	Saída esperada no navegador {"status" : "registrado com sucesso"}
+
+	OBS: 
+	Por convenção, os tipos de dados 'string' são empacotados como reponse normal html. 
+	Os tipos 'array' são empacotados em formato json.
 */
 
-	Route::get('/', function(){
-		echo "nada"; 
+	Route::get('/', function($params){
+		return $params; 
 	}); 

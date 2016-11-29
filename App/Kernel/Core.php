@@ -9,7 +9,7 @@ class Core{
 		/*
 			Identificando qual é o tipo do request; 
 		*/
-		$method = Request::get_method(); 
+		$request_method = Request::get_method(); 
 
 		/*
 			Recolhendo os parâmetros em um array. 
@@ -28,8 +28,20 @@ class Core{
 				Caso ocorra um problema, a aplicação deve emitir um erro ~simpático~
 		*/
 
+		/*
+			Recolendo a rota atual digitada pelo usuário. Exemplo: 
+
+			http://www.exemplo.com.br/welcome
+
+			A rota corrente é /welcome
+		*/
+
+		$current_route = self::get_current_route(); 
+
 		try{
-			$routes[$method]; 
+			//Recupera a rota via método do request e invoca a função anônima
+			$method = $routes[$request_method][$current_route];
+			self::pos_processing($method($params)); 
 		}catch(\Exception $e){
 			var_dump($e->getMessage()); 
 		}
@@ -99,5 +111,21 @@ class Core{
 			return $uri;
 		
 		return substr($uri, 0, $has_get_query);   
+	}
+
+	private function pos_processing($method_result){
+		switch( gettype($method_result) ){
+			case 'string': 
+				die($method_result); 
+			break; 
+
+			case 'array': 
+				die(json_encode($method_result)); 
+			break; 
+
+			case 'object': 
+				var_dump($method_result); 
+			break; 
+		}
 	}
 }

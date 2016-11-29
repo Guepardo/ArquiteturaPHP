@@ -22,4 +22,4 @@ require(__DIR__.DS.'..'.DS.'app'.DS.'routers.php');
 	Intancia a classe core e invoca o método para lidar com as requests
 */
 $core = new Core(); 
-echo $core->get_current_route(); 
+echo $core->handle_requests(); 
