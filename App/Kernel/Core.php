@@ -5,6 +5,8 @@ use App\Kernel\Route;
 use App\Kernel\Request; 
 
 class Core{
+	private $controllers_namespace = 'App\\Controller\\'; 
+
 	public function handle_requests(){
 		/*
 			Identificando qual é o tipo do request; 
@@ -38,10 +40,21 @@ class Core{
 
 		$current_route = self::get_current_route(); 
 
+		/*
+			Recupera a função anônima ou a string para invocação de método; 
+			Se o tipo de $method for igual a string, isso implica em repartir a
+			mensagem e executar o procedimento invocação de classe. Casocontrário, 
+			basta invocar o método anônimo. 
+		*/
+
+		$method = $routes[$request_method][$current_route];
+
 		try{
-			//Recupera a rota via método do request e invoca a função anônima
-			$method = $routes[$request_method][$current_route];
-			self::pos_processing($method($params)); 
+			if(gettype($method) == 'string')
+  				self::pos_processing(self::run_reflection($method, $params)); 
+			else
+				self::pos_processing($method($params)); 
+			
 		}catch(\Exception $e){
 			var_dump($e->getMessage()); 
 		}
@@ -58,7 +71,6 @@ class Core{
 				pastas que não são a root; 
 		*/
 
-		$doc_root = $_SERVER['DOCUMENT_ROOT']; 
 		$self     = $_SERVER['PHP_SELF']; 
 		$uri      = $_SERVER['REQUEST_URI']; 
 
@@ -68,13 +80,11 @@ class Core{
 
 			Exemplo da aplicação rodando na pasta root: 
 
-			C:/xampp/htdocs
 			/public/index.php
 			/adf/sdf/adfasf/adfasdf?df=sdf&sdfsadf=asdf
 
 			Exemplo da aplicação rodando em uma pasta intermediária: 
 
-			C:/xampp/htdocs
 			/ArquiteturaPHP/public/index.php
 			/ArquiteturaPHP/adf/sdf/adfasf/adfasdf?sdf=asdf
 		*/
@@ -111,6 +121,34 @@ class Core{
 			return $uri;
 		
 		return substr($uri, 0, $has_get_query);   
+	}
+
+	private function get_object_by_namespace($controller_name){
+		$space = $this->controllers_namespace . $controller_name;
+
+		/*
+			Tenta invocar uma classe através do namespace da mesma; 
+		*/
+		try{
+			return new $space; 
+		}catch(\Exception $e){
+			return false;
+		}
+
+		return false; 
+	}
+
+	private function run_reflection($method, $params){
+		$temp = explode('@', $method); 
+
+		$class_name  = $temp[0]; 
+		$method_name = $temp[1];  
+
+		$object = self::get_object_by_namespace($class_name);
+
+		$result = call_user_method($method_name, $object, $params); 
+
+		return $result; 
 	}
 
 	private function pos_processing($method_result){

@@ -26,6 +26,8 @@ use App\Kernel\Route;
 	Os tipos 'array' são empacotados em formato json.
 */
 
-	Route::get('/', function($params){
-		return $params; 
-	}); 
+Route::get('/', function($params){
+	return $params; 
+}); 
+
+Route::get('/welcome', 'Welcome@index'); 

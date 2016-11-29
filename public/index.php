@@ -19,7 +19,7 @@ require(__DIR__.DS.'..'.DS.'app'.DS.'routers.php');
 
 
 /*
-	Intancia a classe core e invoca o método para lidar com as requests
+	Instancia a classe core e invoca o método para lidar com as requests
 */
 $core = new Core(); 
-echo $core->handle_requests(); 
+$core->handle_requests(); 
