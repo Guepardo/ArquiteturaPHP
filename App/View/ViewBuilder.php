@@ -38,7 +38,7 @@ class ViewBuilder{
 	}
 
 	public function get_js_files(){
-		return $this->css_paths; 
+		return $this->js_paths; 
 	}
 
 

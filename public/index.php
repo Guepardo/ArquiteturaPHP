@@ -1,6 +1,5 @@
 <?php 
 define('DS'      , DIRECTORY_SEPARATOR); 
-
 define('RESOURCE', __DIR__.DS.'..'.DS.'resource'.DS); 
 
 /*
