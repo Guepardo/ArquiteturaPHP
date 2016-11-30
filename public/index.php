@@ -22,5 +22,8 @@ require(__DIR__.DS.'..'.DS.'app'.DS.'routers.php');
 /*
 	Instancia a classe core e invoca o método para lidar com as requests
 */
-$core = new Core(); 
-$core->handle_requests(); 
+
+if(php_sapi_name() != 'cli'){
+	$core = new Core(); 
+	$core->handle_requests(); 
+}
