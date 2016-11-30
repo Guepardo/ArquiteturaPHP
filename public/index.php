@@ -1,5 +1,7 @@
 <?php 
-define('DS', DIRECTORY_SEPARATOR); 
+define('DS'      , DIRECTORY_SEPARATOR); 
+
+define('RESOURCE', __DIR__.DS.'..'.DS.'resource'.DS); 
 
 /*
 	Carrega o autoload gerado pelo composer. 
