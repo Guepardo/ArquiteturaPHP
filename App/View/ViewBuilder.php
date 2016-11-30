@@ -14,7 +14,7 @@ class ViewBuilder{
 	private $footer   =  ''; 
 	private $head     =  ''; 
 
-
+	private $params   = null; 
 	public function __construct(){
 		$this->title = 'Corollarium'; 
 	}
@@ -141,6 +141,7 @@ class ViewBuilder{
 
 
 	public function render($params=[]){
+		  $this->params = $params; 
 		  return self::get_page();
 	}
 }

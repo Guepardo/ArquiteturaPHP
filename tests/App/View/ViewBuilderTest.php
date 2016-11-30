@@ -3,7 +3,7 @@ use App\View\ViewBuilder;
 
 class ViewBuilderTest extends PHPUnit_Framework_TestCase{
 
-	public function test_get_title(){
+	public function test_get_title_name(){
 
 		$view = ViewBuilder::getInstance(); 
 
@@ -12,7 +12,7 @@ class ViewBuilderTest extends PHPUnit_Framework_TestCase{
 		$this->assertEquals($expected, $view->get_title()); 
 	}
 
-	public function teste_get_title(){
+	public function test_get_title(){
 		$view = ViewBuilder::getInstance(); 
 
 		$result = $view->get_title(); 
@@ -66,7 +66,7 @@ class ViewBuilderTest extends PHPUnit_Framework_TestCase{
 		$this->assertInstanceOf(ViewBuilder::class, $result); 
 	}
 
-	public function teste_get_header(){
+	public function test_get_header(){
 		$view = ViewBuilder::getInstance(); 
 
 		$result = $view->get_header(); 
@@ -83,7 +83,7 @@ class ViewBuilderTest extends PHPUnit_Framework_TestCase{
 		$this->assertInstanceOf(ViewBuilder::class, $result); 
 	}
 
-	public function teste_get_footer(){
+	public function test_get_footer(){
 		$view = ViewBuilder::getInstance(); 
 
 		$result = $view->get_footer(); 
@@ -100,7 +100,7 @@ class ViewBuilderTest extends PHPUnit_Framework_TestCase{
 		$this->assertInstanceOf(ViewBuilder::class, $result); 
 	}
 
-	public function teste_get_head(){
+	public function test_get_head(){
 		$view = ViewBuilder::getInstance(); 
 
 		$result = $view->get_head(); 
@@ -117,7 +117,7 @@ class ViewBuilderTest extends PHPUnit_Framework_TestCase{
 		$this->assertInstanceOf(ViewBuilder::class, $result); 
 	}
 
-	public function teste_get_page(){
+	public function test_get_page(){
 		$view = ViewBuilder::getInstance(); 
 
 		$result = $view->get_page(); 

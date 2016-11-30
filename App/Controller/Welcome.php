@@ -15,7 +15,7 @@ class Welcome{
 			 ->set_head('layout.head'); 
 	}
 
-	public function index($param){
+	public function index($params){
 		return $this->view
 			->add_js_files(['js/teste.js'])
 			->add_css_files(['css/teste.css'])
